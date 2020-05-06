@@ -15,11 +15,11 @@ The result of running this test script is a Markdown table, which you can then c
 
 ## How to extend the script?
 
-### features.js
+### queries.js
 
-In the `features.js` file, there's a list of the different SQL queries that are used to run the test. You can modify the existing queries or add new ones.
+In the `queries.js` file, there's a list of the different SQL queries that are used to run the test. You can modify the existing queries or add new ones.
 
-The script will generate **one table row** per each feature in the `features.js` file.
+The script will generate **one table row** per each feature in the `queries.js` file.
 
 ### connectorTypes.js
 

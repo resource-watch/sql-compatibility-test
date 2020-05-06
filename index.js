@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const Promise = require('bluebird');
 const cliProgress = require('cli-progress');
 
-const features = require('./features');
+const features = require('./queries');
 const providers = require('./connectorTypes');
 
 const performRequest = async (uri) => {

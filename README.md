@@ -19,10 +19,10 @@ The result of running this test script is a Markdown table, which you can then c
 
 In the `queries.js` file, there's a list of the different SQL queries that are used to run the test. You can modify the existing queries or add new ones.
 
-The script will generate **one table row** per each feature in the `queries.js` file.
+The script will generate **one table row** per each query in the `queries.js` file.
 
 ### connectorTypes.js
 
-In the `connectorTypes.js` file, there's a list of the providers against which the test script will be run. Use it to modify the connectorType or dataset you want to test.
+In the `connectorTypes.js` file, there's a list of the connector types against which the test script will be run. Use it to modify the connector type or dataset you want to test.
 
-The script will generate **one table** per each connectorType in the `connectorTypes.js` file.
+The script will generate **one table** per each connector type in the `connectorTypes.js` file.

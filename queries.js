@@ -1,118 +1,118 @@
 module.exports = [
     {
-        featureName: 'SELECT: Projecting all columns using wildcard selector',
+        query: 'SELECT: Projecting all columns using wildcard selector',
         sql: 'SELECT * FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'SELECT: Count all rows',
+        query: 'SELECT: Count all rows',
         sql: 'SELECT count(*) FROM {{tableName}}',
     },
     {
-        featureName: 'SELECT: Projecting specific columns',
+        query: 'SELECT: Projecting specific columns',
         sql: 'SELECT {{stringColumn}}, {{numericColumn}} FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'SELECT: Projecting columns AND counting all rows',
+        query: 'SELECT: Projecting columns AND counting all rows',
         sql: 'SELECT {{stringColumn}}, count(*) FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'SELECT: Aggregate functions such as AVG in SELECT',
+        query: 'SELECT: Aggregate functions such as AVG in SELECT',
         sql: 'SELECT {{aggregateColumn}} FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'SELECT: Aliasing aggregate function results such as AVG in SELECT',
+        query: 'SELECT: Aliasing aggregate function results such as AVG in SELECT',
         sql: 'SELECT {{aggregateColumn}} as alias FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'FROM: Using dataset id in FROM statement',
+        query: 'FROM: Using dataset id in FROM statement',
         sql: 'SELECT * FROM {{datasetId}} LIMIT 5',
     },
     {
-        featureName: 'FROM: Using dataset slug in FROM statement',
+        query: 'FROM: Using dataset slug in FROM statement',
         sql: 'SELECT * FROM {{slug}} LIMIT 5',
     },
     {
-        featureName: 'FROM: Using dataset tableName in FROM statement',
+        query: 'FROM: Using dataset tableName in FROM statement',
         sql: 'SELECT * FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Greater than filtering',
+        query: 'WHERE: Greater than filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} > {{whereLowerValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Greater than or equal filtering',
+        query: 'WHERE: Greater than or equal filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} >= {{whereLowerValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Equality filtering',
+        query: 'WHERE: Equality filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} = {{whereEqValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Lower than filtering',
+        query: 'WHERE: Lower than filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} < {{whereLowerValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Lower than or equal filtering',
+        query: 'WHERE: Lower than or equal filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} <= {{whereGreaterValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Conjunction (AND) filtering',
+        query: 'WHERE: Conjunction (AND) filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} <= {{whereGreaterValue}} AND {{numericColumn2}} > {{whereLowerValue2}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: Disjunction (OR) filtering',
+        query: 'WHERE: Disjunction (OR) filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} <= {{whereLowerValue}} OR {{numericColumn2}} > {{whereLowerValue2}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: BETWEEN filtering',
+        query: 'WHERE: BETWEEN filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} BETWEEN {{whereLowerValue}} AND {{whereGreaterValue}} LIMIT 5',
     },
     {
-        featureName: 'WHERE: LIKE filtering',
+        query: 'WHERE: LIKE filtering',
         sql: 'SELECT * FROM {{tableName}} WHERE {{stringColumn}} LIKE {{whereLikeValue}} LIMIT 5',
     },
     {
-        featureName: 'GROUP BY: Group results by a single column',
+        query: 'GROUP BY: Group results by a single column',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} GROUP BY {{stringColumn}} LIMIT 5',
     },
     {
-        featureName: 'GROUP BY: Group results by multiple columns',
+        query: 'GROUP BY: Group results by multiple columns',
         sql: 'SELECT {{stringColumn}}, {{numericColumn}} FROM {{tableName}} GROUP BY {{stringColumn}}, {{numericColumn}} LIMIT 5',
     },
     {
-        featureName: 'GROUP BY: Aggregate functions used with GROUP BY statements',
+        query: 'GROUP BY: Aggregate functions used with GROUP BY statements',
         sql: 'SELECT {{stringColumn}}, COUNT(*) as count FROM {{tableName}} GROUP BY {{stringColumn}} LIMIT 5',
     },
     {
-        featureName: 'GROUP BY: Special grouping by range function',
+        query: 'GROUP BY: Special grouping by range function',
         sql: 'SELECT count(*) FROM {{tableName}} GROUP BY range({{numericColumn}}, 0,1,2,3,4) LIMIT 5',
     },
     {
-        featureName: 'ORDER BY: Ordering results by one column',
+        query: 'ORDER BY: Ordering results by one column',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} ORDER BY {{stringColumn}} LIMIT 5',
     },
     {
-        featureName: 'ORDER BY: Ordering results by one column descending',
+        query: 'ORDER BY: Ordering results by one column descending',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} ORDER BY {{stringColumn}} DESC LIMIT 5',
     },
     {
-        featureName: 'ORDER BY: Ordering results by multiple column',
+        query: 'ORDER BY: Ordering results by multiple column',
         sql: 'SELECT {{stringColumn}}, {{numericColumn}} FROM {{tableName}} ORDER BY {{stringColumn}}, {{numericColumn}} LIMIT 5',
     },
     {
-        featureName: 'ORDER BY: Ordering results by multiple column descending',
+        query: 'ORDER BY: Ordering results by multiple column descending',
         sql: 'SELECT {{stringColumn}}, {{numericColumn}} FROM {{tableName}} ORDER BY {{stringColumn}}, {{numericColumn}} DESC LIMIT 5',
     },
     {
-        featureName: 'LIMIT: Limit the number of returned results',
+        query: 'LIMIT: Limit the number of returned results',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT 5',
     },
     {
-        featureName: 'OFFSET: Offset the returned results',
+        query: 'OFFSET: Offset the returned results',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT 5 OFFSET 10',
     },
     {
-        featureName: 'OFFSET: Offset the returned results using short syntax',
+        query: 'OFFSET: Offset the returned results using short syntax',
         sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT 5, 10',
     }
 ];

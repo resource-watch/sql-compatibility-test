@@ -1,6 +1,6 @@
 module.exports = [
     {
-        provider: 'carto',
+        connectorType: 'carto',
         datasetId: '0b9f0100-ce5b-430f-ad8f-3363efa05481',
         tableName: 'edi',
         slug: 'Environmental-Democracy-Index-1490086842552',
@@ -15,7 +15,7 @@ module.exports = [
         whereLikeValue: '\'Europ%\'',
     },
     {
-        provider: 'document',
+        connectorType: 'document',
         datasetId: '9be3bf63-97fc-4bb0-b913-775ccae3cf9e',
         tableName: 'index_9be3bf6397fc4bb0b913775ccae3cf9e_1574354150743',
         slug: 'Glad-Alerts-Daily-Geostore-User-Areas_3',

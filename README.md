@@ -21,8 +21,8 @@ In the `features.js` file, there's a list of the different SQL queries that are 
 
 The script will generate **one table row** per each feature in the `features.js` file.
 
-### providers.js
+### connectorTypes.js
 
-In the `providers.js` file, there's a list of the providers against which the test script will be run. Use it to modify the provider or dataset you want to test.
+In the `connectorTypes.js` file, there's a list of the providers against which the test script will be run. Use it to modify the connectorType or dataset you want to test.
 
-The script will generate **one table** per each provider in the `providers.js` file.
+The script will generate **one table** per each connectorType in the `connectorTypes.js` file.

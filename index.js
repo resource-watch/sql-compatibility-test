@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 const cliProgress = require('cli-progress');
 
 const features = require('./features');
-const providers = require('./providers');
+const providers = require('./connectorTypes');
 
 const performRequest = async (uri) => {
     try {
@@ -41,7 +41,7 @@ const main = async () => {
     let queryResults = {};
 
     for (const dataset of providers) {
-        queryResults[dataset.provider] = await Promise.map(
+        queryResults[dataset.connectorType] = await Promise.map(
             features,
             async ({ featureName, sql }) => {
                 const url = processURL('http://api.resourcewatch.org/v1/query/' + dataset.datasetId, sql, dataset);
@@ -59,7 +59,7 @@ const main = async () => {
         console.log(`
 | Supported | Feature | Example URL |
 |-----------|---------|-------------|`);
-        queryResults[dataset.provider].map(st => console.log(st));
+        queryResults[dataset.connectorType].map(st => console.log(st));
         console.log('\n\n')
     }
 }

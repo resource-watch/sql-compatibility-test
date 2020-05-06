@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bluebird": "^3.7.2",
-    "chalk": "^4.0.0"
+    "chalk": "^4.0.0",
+    "cli-progress": "^3.8.2"
   }
 }

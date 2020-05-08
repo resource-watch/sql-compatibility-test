@@ -12,9 +12,6 @@ module.exports = [
         // The slug of the dataset to be used
         slug: 'Environmental-Democracy-Index-1490086842552',
 
-        // A numeric column from the data of the dataset that can be aggregated
-        aggregateColumn: 'AVG(overall_score)',
-
         // A string column from the data of the dataset
         stringColumn: 'region',
 
@@ -42,9 +39,8 @@ module.exports = [
     {
         connectorType: 'document',
         datasetId: '9be3bf63-97fc-4bb0-b913-775ccae3cf9e',
-        tableName: 'index_9be3bf6397fc4bb0b913775ccae3cf9e_1574354150743',
+        tableName: 'data',
         slug: 'Glad-Alerts-Daily-Geostore-User-Areas_3',
-        aggregateColumn: 'AVG(alert__count)',
         stringColumn: 'bra_biome__name',
         numericColumn: 'alert__count',
         numericColumn2: 'alert_area__ha',

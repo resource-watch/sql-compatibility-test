@@ -16,12 +16,24 @@ module.exports = [
         sql: 'SELECT {{stringColumn}}, count(*) FROM {{tableName}} LIMIT 5',
     },
     {
-        query: 'SELECT: Aggregate functions such as AVG in SELECT',
-        sql: 'SELECT {{aggregateColumn}} FROM {{tableName}} LIMIT 5',
+        query: 'SELECT: Aliasing aggregate function results such as AVG in SELECT',
+        sql: 'SELECT AVG({{aggregateColumn}}) as alias FROM {{tableName}} LIMIT 5',
     },
     {
-        query: 'SELECT: Aliasing aggregate function results such as AVG in SELECT',
-        sql: 'SELECT {{aggregateColumn}} as alias FROM {{tableName}} LIMIT 5',
+        query: 'SELECT: Usage of aggregate functions (AVG) in SELECT',
+        sql: 'SELECT AVG({{numericColumn}}) FROM {{tableName}} LIMIT 5',
+    },
+    {
+        query: 'SELECT: Usage of aggregate functions (MAX) in SELECT',
+        sql: 'SELECT MAX({{numericColumn}}) FROM {{tableName}} LIMIT 5',
+    },
+    {
+        query: 'SELECT: Usage of aggregate functions (MIN) in SELECT',
+        sql: 'SELECT MIN({{numericColumn}}) FROM {{tableName}} LIMIT 5',
+    },
+    {
+        query: 'SELECT: Usage of aggregate functions (SUM) in SELECT',
+        sql: 'SELECT SUM({{numericColumn}}) FROM {{tableName}} LIMIT 5',
     },
     {
         query: 'FROM: Using dataset id in FROM statement',
@@ -49,7 +61,7 @@ module.exports = [
     },
     {
         query: 'WHERE: Lower than filtering',
-        sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} < {{whereLowerValue}} LIMIT 5',
+        sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} < {{whereGreaterValue}} LIMIT 5',
     },
     {
         query: 'WHERE: Lower than or equal filtering',
@@ -61,7 +73,7 @@ module.exports = [
     },
     {
         query: 'WHERE: Disjunction (OR) filtering',
-        sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} <= {{whereLowerValue}} OR {{numericColumn2}} > {{whereLowerValue2}} LIMIT 5',
+        sql: 'SELECT * FROM {{tableName}} WHERE {{numericColumn}} <= {{whereGreaterValue}} OR {{numericColumn2}} > {{whereLowerValue2}} LIMIT 5',
     },
     {
         query: 'WHERE: BETWEEN filtering',

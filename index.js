@@ -28,9 +28,11 @@ const processSql = (sql, dataset) => {
 
 const processURL = (base, sql, dataset) => base + '?sql=' + encodeURIComponent(processSql(sql, dataset));
 
-const formatSupported = (result = []) => result.length > 0 ? chalk.green('Supported') : chalk.red('**Not supported**');
+const formatSupported = (result = []) => result.length > 0 ? chalk.green('YES') : chalk.red('NO');
 
 const formatLink = (url, sql, dataset) => `[${processSql(sql, dataset)}](${url})`;
+
+const escapeMarkdownSpecialChars = (string) => string.replace(/\*/g, '\\*').replace(/_/g, '\\_');
 
 const main = async () => {
     console.log(chalk.bold('\nSQL compatibility checker for different dataset connectors!\n'));
@@ -59,7 +61,7 @@ const main = async () => {
         console.log(`
 | Supported | Feature | Example URL |
 |-----------|---------|-------------|`);
-        queryResults[dataset.connectorType].map(st => console.log(st));
+        queryResults[dataset.connectorType].map(st => console.log(escapeMarkdownSpecialChars(st)));
         console.log('\n\n')
     }
 }

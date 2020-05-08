@@ -17,7 +17,7 @@ module.exports = [
     },
     {
         query: 'SELECT: Aliasing aggregate function results such as AVG in SELECT',
-        sql: 'SELECT AVG({{aggregateColumn}}) as alias FROM {{tableName}} LIMIT 5',
+        sql: 'SELECT AVG({{numericColumn}}) as alias FROM {{tableName}} LIMIT 5',
     },
     {
         query: 'SELECT: Usage of aggregate functions (AVG) in SELECT',

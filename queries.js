@@ -1,6 +1,6 @@
 module.exports = [
     {
-        query: 'SELECT: Projecting all columns using wildcard selector',
+        query: 'SELECT: Selecting all columns using wildcard',
         sql: 'SELECT * FROM {{tableName}} LIMIT 5',
     },
     {
@@ -8,11 +8,15 @@ module.exports = [
         sql: 'SELECT count(*) FROM {{tableName}}',
     },
     {
-        query: 'SELECT: Projecting specific columns',
+        query: 'SELECT: Selecting specific columns',
         sql: 'SELECT {{stringColumn}}, {{numericColumn}} FROM {{tableName}} LIMIT 5',
     },
     {
-        query: 'SELECT: Projecting columns AND counting all rows',
+        query: 'SELECT: Selecting DISTINCT values for specific columns',
+        sql: 'SELECT DISTINCT({{stringColumn}}) FROM {{tableName}} LIMIT 5',
+    },
+    {
+        query: 'SELECT: Selecting columns AND counting all rows',
         sql: 'SELECT {{stringColumn}}, count(*) FROM {{tableName}} LIMIT 5',
     },
     {
@@ -38,10 +42,12 @@ module.exports = [
     {
         query: 'FROM: Using dataset id in FROM statement',
         sql: 'SELECT * FROM {{datasetId}} LIMIT 5',
+        baseURLOverride: 'http://api.resourcewatch.org/v1/query',
     },
     {
         query: 'FROM: Using dataset slug in FROM statement',
         sql: 'SELECT * FROM {{slug}} LIMIT 5',
+        baseURLOverride: 'http://api.resourcewatch.org/v1/query',
     },
     {
         query: 'FROM: Using dataset tableName in FROM statement',

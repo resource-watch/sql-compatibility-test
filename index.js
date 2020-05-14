@@ -45,11 +45,12 @@ const main = async () => {
     for (const dataset of connectors) {
         queryResults[dataset.connectorType] = await Promise.map(
             queries,
-            async ({ query, sql }) => {
-                const url = processURL('http://api.resourcewatch.org/v1/query/' + dataset.datasetId, sql, dataset);
+            async ({ query, sql, baseURLOverride = undefined }) => {
+                const baseURLToUse = baseURLOverride || 'http://api.resourcewatch.org/v1/query/' + dataset.datasetId;
+                const url = processURL(baseURLToUse, sql, dataset);
                 const result = await performRequest(url);
                 progress.increment();
-                return `| ${formatSupported(result)} | ${query} | ${formatLink(url, sql, dataset)} |`;
+                return { result, query, url, sql };
             },
             { concurrency: 2 },
         );
@@ -61,7 +62,23 @@ const main = async () => {
         console.log(`
 | Supported | Feature | Example URL |
 |-----------|---------|-------------|`);
-        queryResults[dataset.connectorType].map(st => console.log(escapeMarkdownSpecialChars(st)));
+        queryResults[dataset.connectorType].map(({ result, query, url, sql }) => {
+            let tableRow = '| ';
+            const notSupported = result.length <= 0;
+            tableRow += notSupported
+                ? '**' + (formatSupported(result)) + '** | '
+                : formatSupported(result) + ' | ';
+
+            tableRow += notSupported
+                ? '**' + escapeMarkdownSpecialChars(query) + '** | '
+                : escapeMarkdownSpecialChars(query) + ' | ';
+
+            tableRow += notSupported
+                ? '**' + escapeMarkdownSpecialChars(formatLink(url, sql, dataset)) + '** | '
+                : escapeMarkdownSpecialChars(formatLink(url, sql, dataset)) + ' | ';
+
+            console.log(tableRow);
+        });
         console.log('\n\n')
     }
 }

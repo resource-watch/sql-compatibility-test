@@ -11,18 +11,17 @@ The result of running this test script is a Markdown table, which you can then c
 * Install [node](https://nodejs.org/en/)
 * Clone this repository
 * To install the project dependencies run: `npm install`
-* To run test script, execute the following command on the root of the project: `node index.js`
+* To run the main test script, execute the following command on the root of the project: `node main`
+* To run the test script for geospatial queries, execute the following command on the root of the project: `node geo`
 
 ## How to extend the script?
 
-### queries.js
+### Extending queries
 
-In the `queries.js` file, there's a list of the different SQL queries that are used to run the test. You can modify the existing queries or add new ones.
+In the `queries` directory, there are two files with a list of the different SQL queries that are used to run the tests. 
+You can modify the existing queries or add new ones. The script will generate **one table row** per each query in the queries files.
 
-The script will generate **one table row** per each query in the `queries.js` file.
+### Extending connectors
 
-### connectorTypes.js
-
-In the `connectorTypes.js` file, there's a list of the connector types against which the test script will be run. Use it to modify the connector type or dataset you want to test.
-
-The script will generate **one table** per each connector type in the `connectorTypes.js` file.
+In the `connectors` directory, there are two files with a list of the connector types against which the test script will be ran. 
+Use it to modify the connector type or dataset you want to test. The script will generate **one table** per each connector type in the connector files.

@@ -3,9 +3,6 @@ const chalk = require('chalk');
 const Promise = require('bluebird');
 const cliProgress = require('cli-progress');
 
-const queries = require('./queries');
-const connectors = require('./connectorTypes');
-
 const performRequest = async (uri) => {
     try {
         const response = await axios.get(uri);
@@ -34,7 +31,7 @@ const formatLink = (url, sql, dataset) => `[${processSql(sql, dataset)}](${url})
 
 const escapeMarkdownSpecialChars = (string) => string.replace(/\*/g, '\\*').replace(/_/g, '\\_');
 
-const main = async () => {
+const executeTest = async (connectors, queries) => {
     console.log(chalk.bold('\nSQL compatibility checker for different dataset connectors!\n'));
 
     const progress = new cliProgress.SingleBar({}, cliProgress.Presets.shades_grey);
@@ -83,4 +80,12 @@ const main = async () => {
     }
 }
 
-main().then(() => {});
+module.exports = {
+    performRequest,
+    processSql,
+    processURL,
+    formatSupported,
+    formatLink,
+    escapeMarkdownSpecialChars,
+    executeTest,
+}

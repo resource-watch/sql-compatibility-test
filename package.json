@@ -1,7 +1,7 @@
 {
   "name": "sql-compat-test",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",

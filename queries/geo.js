@@ -18,5 +18,17 @@ module.exports = [
     {
         query: '[PostGIS: ST_ValueCount](https://postgis.net/docs/RT_ST_ValueCount.html)',
         sql: 'SELECT ST_VALUECOUNT({{rasterCol}}) FROM {{tableName}} LIMIT 5',
+    },
+    {
+        query: 'Using PostGIS functions in WHERE clause',
+        sql: 'SELECT * FROM {{tableName}} WHERE ST_METADATA({{rasterCol}}) IS NOT NULL LIMIT 5',
+    },
+    {
+        query: 'Using PostGIS functions in GROUP BY clause',
+        sql: 'SELECT * FROM {{tableName}} GROUP BY ST_SUMMARYSTATS({{rasterCol}}, true) IS NOT NULL LIMIT 5',
+    },
+    {
+        query: 'Using PostGIS functions in ORDER BY clause',
+        sql: 'SELECT * FROM {{tableName}} ORDER BY ST_METADATA({{rasterCol}}) IS NOT NULL LIMIT 5',
     }
 ];

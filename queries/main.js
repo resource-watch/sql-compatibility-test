@@ -42,12 +42,10 @@ module.exports = [
     {
         query: 'FROM: Using dataset id in FROM statement',
         sql: 'SELECT * FROM {{datasetId}} LIMIT 5',
-        baseURLOverride: 'http://api.resourcewatch.org/v1/query',
     },
     {
         query: 'FROM: Using dataset slug in FROM statement',
         sql: 'SELECT * FROM {{slug}} LIMIT 5',
-        baseURLOverride: 'http://api.resourcewatch.org/v1/query',
     },
     {
         query: 'FROM: Using dataset tableName in FROM statement',
@@ -127,10 +125,38 @@ module.exports = [
     },
     {
         query: 'OFFSET: Offset the returned results',
-        sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT 5 OFFSET 10',
+        sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT {{limit}} OFFSET {{offset}}',
+        params: {
+            calls: [
+                { limit: 5, offset: 0 },
+                { limit: 5, offset: 5 },
+            ],
+            validateFunction: (results = []) => {
+                if (!!results) {
+                    const [res1, res2] = results;
+                    return !res1.map(item => item._id).includes(res2[0]._id);
+                } else {
+                    return false;
+                }
+            }
+        }
     },
     {
         query: 'OFFSET: Offset the returned results using short syntax',
-        sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT 5, 10',
+        sql: 'SELECT {{stringColumn}} FROM {{tableName}} LIMIT {{limit}}, {{offset}}',
+        params: {
+            calls: [
+                { limit: 5, offset: 0 },
+                { limit: 5, offset: 5 },
+            ],
+            validateFunction: (results = []) => {
+                if (!!results) {
+                    const [res1, res2] = results;
+                    return !res1.map(item => item._id).includes(res2[0]._id);
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 ];

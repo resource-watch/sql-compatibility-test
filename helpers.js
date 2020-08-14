@@ -1,33 +1,8 @@
-const axios = require('axios');
 const chalk = require('chalk');
 const Promise = require('bluebird');
 const cliProgress = require('cli-progress');
 
-const performRequest = async (uri) => {
-    try {
-        const response = await axios.get(uri);
-        return response.data && response.data.data ? response.data.data : [];
-    } catch (error) {
-        // Uncomment to see errors in the requests
-        // console.error(error.message);
-        return [];
-    }
-};
-
-const processSql = (sql, dataset) => {
-    let processedSql = sql;
-    Object.keys(dataset).forEach(key => {
-        const regex = new RegExp('{{' + key + '}}', 'g');
-        processedSql = processedSql.replace(regex, dataset[key]);
-    });
-    return processedSql;
-};
-
-const processURL = (base, sql, dataset) => base + '?sql=' + encodeURIComponent(processSql(sql, dataset));
-
-const formatSupported = (result = []) => result.length > 0 ? chalk.green('YES') : chalk.red('NO');
-
-const formatLink = (url, sql, dataset) => `[${processSql(sql, dataset)}](${url})`;
+const QueryRunner = require('./queryRunner');
 
 const escapeMarkdownSpecialChars = (string) => string.replace(/\*/g, '\\*').replace(/_/g, '\\_');
 
@@ -42,14 +17,13 @@ const executeTest = async (connectors, queries) => {
     for (const dataset of connectors) {
         queryResults[dataset.connectorType] = await Promise.map(
             queries,
-            async ({ query, sql, baseURLOverride = undefined }) => {
-                const baseURLToUse = baseURLOverride || 'http://api.resourcewatch.org/v1/query/' + dataset.datasetId;
-                const url = processURL(baseURLToUse, sql, dataset);
-                const result = await performRequest(url);
+            async ({ query, sql, params = {} }) => {
+                const queryRunner = new QueryRunner(sql, query, dataset, params);
+                await queryRunner.executeQuery();
                 progress.increment();
-                return { result, query, url, sql };
+                return { queryRunner };
             },
-            { concurrency: 2 },
+            { concurrency: 1 },
         );
     }
 
@@ -59,20 +33,18 @@ const executeTest = async (connectors, queries) => {
         console.log(`
 | Supported | Feature | Example URL |
 |-----------|---------|-------------|`);
-        queryResults[dataset.connectorType].map(({ result, query, url, sql }) => {
+        queryResults[dataset.connectorType].map(({ queryRunner }) => {
             let tableRow = '| ';
-            const notSupported = result.length <= 0;
-            tableRow += notSupported
-                ? '**' + (formatSupported(result)) + '** | '
-                : formatSupported(result) + ' | ';
+            const notSupported = !queryRunner.isSupported();
+            tableRow += notSupported ? '**' + chalk.red('NO') + '** | ' : chalk.green('YES') + ' | ';
 
             tableRow += notSupported
-                ? '**' + escapeMarkdownSpecialChars(query) + '** | '
-                : escapeMarkdownSpecialChars(query) + ' | ';
+                ? '**' + escapeMarkdownSpecialChars(queryRunner.getQuery()) + '** | '
+                : escapeMarkdownSpecialChars(queryRunner.getQuery()) + ' | ';
 
             tableRow += notSupported
-                ? '**' + escapeMarkdownSpecialChars(formatLink(url, sql, dataset)) + '** | '
-                : escapeMarkdownSpecialChars(formatLink(url, sql, dataset)) + ' | ';
+                ? '**' + escapeMarkdownSpecialChars(queryRunner.getFormattedURL()) + '** | '
+                : escapeMarkdownSpecialChars(queryRunner.getFormattedURL()) + ' | ';
 
             console.log(tableRow);
         });
@@ -80,12 +52,4 @@ const executeTest = async (connectors, queries) => {
     }
 }
 
-module.exports = {
-    performRequest,
-    processSql,
-    processURL,
-    formatSupported,
-    formatLink,
-    escapeMarkdownSpecialChars,
-    executeTest,
-}
+module.exports = { executeTest };

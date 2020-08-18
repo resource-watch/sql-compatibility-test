@@ -13,7 +13,7 @@ module.exports = [
     },
     {
         query: 'SELECT: Selecting DISTINCT values for specific columns',
-        sql: 'SELECT DISTINCT({{stringColumn}}) FROM {{tableName}} LIMIT 5',
+        sql: 'SELECT DISTINCT {{stringColumn}} FROM {{tableName}} LIMIT 5',
     },
     {
         query: 'SELECT: Selecting columns AND counting all rows',

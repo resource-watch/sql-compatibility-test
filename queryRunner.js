@@ -35,11 +35,11 @@ class QueryRunner {
             if (this.params.calls) {
                 return await Promise.all(this.params.calls.map(async callParams => {
                     uri = this.interpolate(uri, callParams);
-                    const res = await axios.get(uri);
+                    const res = await axios.get(encodeURI(uri));
                     return res.data && res.data.data ? res.data.data : null;
                 }));
             } else {
-                const response = await axios.get(uri);
+                const response = await axios.get(encodeURI(uri));
                 return response.data && response.data.data ? [response.data.data] : null;
             }
         } catch (error) {
